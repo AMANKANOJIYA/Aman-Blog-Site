@@ -1,0 +1,19 @@
+<div class="comment_section">
+  <h2>Comment</h2>
+  <form action="" method="POST">
+    <textarea
+      name="comment"
+      id="comment-area"
+      cols="30"
+      rows="10"
+      placeholder="Add Comment"
+    ></textarea><br />
+    <button type="submit" class="button_add_comment">Add Comment</button><br />
+    <span class="rule" id="rule-1">1. No spam, No foul language</span><br />
+    <span class="rule" id="rule-2">2. No anchor text or keywords in commenter’s
+      name</span><br />
+    <span class="rule" id="rule-3">3. No sales pitch.</span><br />
+    <span class="rule" id="rule-4">4. No affiliates.</span><br />
+  </form>
+</div>
+{{>comments_each}}

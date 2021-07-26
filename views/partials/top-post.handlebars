@@ -1,0 +1,14 @@
+<div class="content" id="top-posts">
+  {{#each topPost}}
+    <a href="/blogpage/{{this.slug}}/{{this._id}}" class="special-link">
+      <div class="blog-tag" id="blog-tag-{{rank @index}}">
+        <span class="blog-num">{{rank @index}}</span>
+        <div class="text-blog">
+          <h3 class="title-blog title">{{this.title}}
+          </h3>
+          <span class="short-des-blog time">{{this.date}}</span>
+        </div>
+      </div>
+    </a>
+  {{/each}}
+</div>

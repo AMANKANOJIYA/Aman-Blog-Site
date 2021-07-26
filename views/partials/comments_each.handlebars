@@ -1,0 +1,16 @@
+<div class="comments_area">
+  {{#each comments}}
+    <div class="comment {{this._id}}">
+      <img src="../../images/default.jpeg" alt="" class="comment_part-1" />
+      <div class="comment_part-2">
+        <div class="user_info">
+          <div class="user_name">AMan Kanojiya</div>
+          <span class="date">{{this.date}}</span>
+        </div>
+        <div class="comment_text">
+          {{this.content_comment}}
+        </div>
+      </div>
+    </div>
+  {{/each}}
+</div>

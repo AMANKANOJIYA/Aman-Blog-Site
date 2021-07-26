@@ -1,0 +1,48 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Main-Blog-Scroll</title>
+    <link rel="stylesheet" href="/css/hello.css" />
+    <link rel="stylesheet" href="/css/app.css" />
+  </head>
+  <body>
+{{>topNav}}
+{{>path}}
+    <div class="big-containor" id="big-containor">
+      <section class="section left" id="left">
+        <div class="big-width">
+          <input
+            type="search"
+            placeholder="Search...."
+            class="input"
+            id="search"
+          />
+          {{>category-task}}
+          <div class="categories" id="blogs">
+            <h2 style="margin-bottom: 30px;">Top Posts</h2>
+            {{>top-post}}
+          </div>
+          <div class="instagram" id="instagram">
+            <h2 style="margin-bottom: 30px;">Instagram</h2>
+            <div class="image-insta">
+              <img src="/images/downloadssss.jpg" alt="" />
+              <img src="/images/downloadssss.jpg" alt="" />
+              <img src="/images/downloadssss.jpg" alt="" />
+              <img src="/images/downloadssss.jpg" alt="" />
+              <img src="/images/downloadssss.jpg" alt="" />
+              <img src="/images/downloadssss.jpg" alt="" />
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="trigger" id="trigger">&nearrow;</div>
+      <section class="section" id="right">
+        {{{body}}}
+      </section>
+    </div>
+    {{>footer}}
+  </body>
+  <script src="/js/script.js"></script>
+</html>

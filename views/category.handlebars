@@ -1,0 +1,22 @@
+{{>topNav}}
+{{>path}}
+<h1 class="category-heading">{{category_name}}</h1>
+<div class="catrgory-block">
+{{#each category}}
+  <a
+    href="/blogpage/{{this.slug}}"
+    style="list-style: none; text-decoration:none;"
+  >
+    <div class="card" id="card-{{this._id}}">
+      <img src="../{{this.img_src}}" alt="" />
+      <div class="blog-cont">
+        <span class="short-des-blog time">{{this.date}}</span>
+        <h3 class="title-blog title">{{this.title}}
+        </h3>
+        <p>{{this.content}}</p>
+      </div>
+    </div>
+  </a>
+{{/each}}
+</div>
+{{>footer}}

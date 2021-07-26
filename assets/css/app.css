@@ -1,0 +1,226 @@
+.about-containor {
+  width: 80%;
+  height: auto;
+  padding: 50px 0px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+  margin: auto;
+}
+.logo-tag {
+  font-size: 50px;
+}
+.about-content {
+  padding: 20px 10px;
+  width: 80%;
+  text-align: left;
+  font-size: 17px;
+  letter-spacing: 1px;
+  line-height: 25px;
+}
+.blogpage-heading {
+  width: auto;
+  margin: 10px 1px;
+  font-size: 40px;
+  font-family: var(--font-calibri);
+  color: var(--main-color);
+  padding: 100px 10px 30px;
+}
+.blogpage-content {
+  font-family: var(--font-calibri);
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--dark-gray);
+  padding: 10px 40px 40px;
+}
+.blogpage-image {
+  width: 80%;
+  border-radius: 3px;
+  box-shadow: 2px 2px 60px rgba(104, 104, 104, 0.486);
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  height: auto;
+  width: 100%;
+  padding: 10px 50px 50px;
+}
+
+.lable {
+  margin-top: 20px;
+  font-family: var(--font-mvboli);
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--dark-gray);
+  padding: 10px 40px;
+  width: 60%;
+  text-align: left;
+}
+
+.input {
+  height: 40px;
+  width: 60%;
+  font-size: 18px;
+  color: black;
+  border: none;
+  padding: 20px 20px;
+  border-radius: 6px;
+  box-shadow: 1px 1px 8px rgb(158 158 158 / 55%);
+}
+
+.textarea {
+  height: 150px;
+}
+
+.category-heading {
+  margin: 30px auto;
+  font-family: var(--font-calibri);
+  font-weight: 700;
+  color: var(--main-color);
+  font-size: 60px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+.catrgory-block {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 100%;
+  height: auto;
+  padding-bottom: 30px;
+}
+
+.special-link {
+  text-decoration: none;
+}
+/* Comment Section --------------------------- */
+
+.comment_section {
+  padding: 40px auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+}
+
+.comment_section h2 {
+  margin: 30px auto;
+  font-family: var(--font-calibri);
+  font-weight: 700;
+  color: var(--main-color);
+  font-size: 30px;
+  letter-spacing: 1px;
+  width: 100%;
+  margin-left: 30px;
+}
+form {
+  width: 100%;
+}
+#comment-area {
+  width: 80%;
+  margin: 5px auto;
+  border-radius: 5px;
+  padding: 20px 30px;
+  border: none;
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+.button_add_comment {
+  height: 40px;
+  width: 160px;
+  padding: 10px;
+  text-align: center;
+  background-color: var(--main-color);
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 5px;
+  margin-bottom: 30px;
+  cursor: pointer;
+  border: none;
+}
+
+.rule {
+  color: var(--dark-gray);
+  font-size: 14px;
+  font-family: var(--font-mvboli);
+}
+
+.comments_area {
+  margin-top: 60px;
+  padding: 50px auto;
+  height: auto;
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.comment {
+  display: flex;
+  padding: 11px 20px;
+  box-shadow: 1px 1px 20px rgb(185 185 185 / 63%);
+  border-radius: 3px;
+  align-items: center;
+}
+.comment_part-1 {
+  height: 75px;
+  width: 75px;
+  border-radius: 50%;
+}
+.user_name {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--main-color);
+  font-family: var(--font-axis);
+  padding: 4px 20px;
+}
+.date {
+  color: #6a6a6a;
+  font-size: 12px;
+  font-family: var(--font-axis);
+  padding: 3px 20px;
+}
+.comment_text {
+  font-family: var(--font-mvboli);
+  padding: 8px 20px;
+}
+/* Comment Section --------------------------- */
+@media only screen and (max-width: 650px) {
+  .top ul {
+    display: none;
+  }
+  .top {
+    padding: 1px 42px 1px 20px;
+    height: 70px;
+  }
+  .logo-tag {
+    font-size: 30px;
+  }
+  .blogpage-heading {
+    margin: 10px 1px;
+    font-size: 27px;
+    padding: 17px 10px 18px;
+  }
+  .blogpage-content {
+    font-size: 15px;
+    padding: 10px 21px 19px;
+  }
+  .footer {
+    padding: 31px 36px;
+  }
+  .navigate {
+    height: 50px;
+    padding: 1px 72px 1px 24px;
+  }
+}

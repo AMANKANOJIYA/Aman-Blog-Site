@@ -1,0 +1,11 @@
+<div class="categories" id="categories">
+  <h2>Categories</h2>
+  <ul>
+    {{#each category}}
+      <li><a
+          href="/category/{{this.category_name}}"
+        >{{this.category_name}}</a></li>
+      <hr />
+    {{/each}}
+  </ul>
+</div>

@@ -1,0 +1,59 @@
+.main {
+  height: 100%;
+  width: 100%;
+}
+.box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 550px;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 50px 50px;
+  border-radius: 43px;
+  background: #f3f3f3;
+  box-shadow: 10px 10px 33px #b1b1b1, -10px -10px 33px #ffffff;
+}
+.box h3 {
+  font-size: 30px;
+  font-weight: 600;
+  font-family: var(--font-axis);
+  color: var(--main-color);
+  margin-bottom: 30px;
+}
+.form_div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  margin: 15px auto;
+}
+.form_div label {
+  font-family: var(--font-axis);
+  font-size: 15px;
+  font-weight: 400;
+  color: black;
+}
+.form_div input {
+  height: 40px;
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  padding: 1px 10px;
+}
+.auth_submit {
+  height: 40px;
+  width: 100px;
+  border-radius: 10px;
+  background: linear-gradient(145deg, #ffffff, #dbdbdb);
+  box-shadow: 6px 6px 12px #a0a0a0, -6px -6px 12px #ffffff;
+  border: none;
+  font-family: var(--font-axis);
+  cursor: pointer;
+}
+.para_auth {
+  margin-top: 30px;
+  font-family: var(--font-mvboli);
+}

@@ -2,8 +2,11 @@ const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
 var exphb = require("express-handlebars");
+const bcrypt = require("bcrypt");
 const BlogPost = require("./models/blogSchema");
 const Comment = require("./models/commentSchema");
+const SocialMedia = require("./models/socialSchema");
+const User = require("./models/userSchema");
 const bodyParser = require("body-parser");
 
 const content = require("./data/blog");
@@ -35,16 +38,20 @@ app.set("view engine", "handlebars");
 
 app.use(express.static(path.join(__dirname, "assets")));
 app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 
 app.get("/", async (req, res) => {
   try {
     const blogs = await BlogPost.find();
+    const social = await SocialMedia.find();
     topPost = blogs.slice(0, 5);
+    topSocial = social.slice(0, 6);
     res.render("index", {
       blogs: blogs.map((blog) => blog.toJSON()),
       category,
       topPost: topPost.map((post) => post.toJSON()),
+      topSocial: topSocial.map((pic) => pic.toJSON()),
     });
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -129,10 +136,52 @@ app.get("/category/:slug", async (req, res) => {
   }
 });
 
-app.get("/comment", async (req, res) => {
-  console.log("request comment");
-  const comment = await Comment.find();
-  res.json(comment);
+// app.get("/comment", async (req, res) => {
+//   console.log("request comment");
+//   const comment = await Comment.find();
+//   res.json(comment);
+// });
+
+app.post("/socialmedia", async (req, res) => {
+  const social = new SocialMedia({
+    date: new Date().toLocaleString(),
+    img_src: req.body.img_src,
+  });
+  try {
+    const al = await social.save();
+    res.json(al);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+app.get("/login", (req, res) => {
+  res.render("login", { layout: "extra" });
+});
+
+app.post("/login", (req, res) => {
+  // res.render("login", { layout: "extra" });
+  res.redirect("/");
+});
+
+app.get("/signup", (req, res) => {
+  res.render("signup", { layout: "extra" });
+});
+
+app.post("/signup", async (req, res) => {
+  const hash_password = await bcrypt.hash(req.body.password, 10);
+  const user_new = new User({
+    datejoin: new Date().toLocaleString(),
+    username: req.body.username,
+    email: req.body.email,
+    password: hash_password,
+  });
+  try {
+    const al = await user_new.save();
+    res.redirect("/login");
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 });
 
 app.listen(port, () => {

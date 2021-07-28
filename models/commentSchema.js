@@ -5,6 +5,11 @@ const commentSchema = new mongoose.Schema({
     required: true,
     default: "AMAN",
   },
+  user_name: {
+    type: String,
+    required: true,
+    default: "AMAN",
+  },
   post_id: {
     type: String,
     required: true,

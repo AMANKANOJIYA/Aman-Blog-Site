@@ -245,23 +245,40 @@ app.post(
 );
 
 app.get("/signup", idloggedOut, (req, res) => {
-  res.render("signup", { layout: "extra" });
+  res.render("signup", { layout: "extra", error: "" });
 });
 
 app.post("/signup", async (req, res) => {
   const hash_password = await bcrypt.hash(req.body.password, 10);
-  const user_new = new User({
-    datejoin: new Date().toLocaleString(),
-    username: req.body.username,
-    email: req.body.email,
-    password: hash_password,
+  const olddata = await User.find();
+  var sameContent = true;
+  olddata.forEach((each) => {
+    console.log(each.username, req.body.username, each.email, req.body.email);
+    if (each.username == req.body.username || each.email == req.body.email) {
+      sameContent = false;
+      console.log(sameContent);
+    }
   });
-  try {
-    const al = await user_new.save();
-    res.redirect("/login");
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-    res.redirect("/signup");
+  console.log(sameContent);
+  if (sameContent) {
+    const user_new = new User({
+      datejoin: new Date().toLocaleString(),
+      username: req.body.username,
+      email: req.body.email,
+      password: hash_password,
+    });
+    try {
+      const al = await user_new.save();
+      res.redirect("/login");
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+      res.redirect("/signup");
+    }
+  } else {
+    res.render("signup", {
+      layout: "extra",
+      error: "User With this UserName or Email Already exists",
+    });
   }
 });
 app.get("/logout", (req, res) => {
@@ -269,8 +286,17 @@ app.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
-app.get("/profile", (req, res) => {
-  res.render("profile", { layout: "extra" });
+app.get("/profile", idloggedIn, async (req, res) => {
+  const data = await User.findById(req.user.id);
+  try {
+    res.render("profile", {
+      layout: "extra",
+      title: "Profile | Me",
+      data: data.toJSON(),
+    });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 });
 app.listen(process.env.PORT, () => {
   console.log(`Blog app listening at http://localhost:${process.env.PORT}`);

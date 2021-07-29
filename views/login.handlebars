@@ -2,6 +2,9 @@
   <div class="box">
     <h3>Login</h3>
     <form action="" method="post" class="form_auth">
+      {{#if messages.error}}
+        <p class="errorshown">{{messages.error}}</p>
+      {{/if}}
       <div class="form_div">
         <label for="username">Email*</label>
         <input type="email" id="username" name="username" />

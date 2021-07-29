@@ -10,6 +10,7 @@ const flash = require("express-flash");
 const BlogPost = require("./models/blogSchema");
 const Comment = require("./models/commentSchema");
 const SocialMedia = require("./models/socialSchema");
+const Contact = require("./models/contactSchema");
 const User = require("./models/userSchema");
 const bodyParser = require("body-parser");
 const content = require("./data/blog");
@@ -22,6 +23,9 @@ const hbs = exphb.create({
   helpers: {
     rank: function (value) {
       return value + 1;
+    },
+    subString: function (value) {
+      return value.slice(0, 300);
     },
   },
 });
@@ -126,7 +130,29 @@ app.get("/about", idloggedIn, (req, res) => {
 });
 
 app.get("/contact", idloggedIn, (req, res) => {
-  res.render("contact", { layout: "extra", title: "Contact" });
+  res.render("contact", {
+    layout: "extra",
+    title: "Contact",
+  });
+});
+
+app.post("/contact", idloggedIn, async (req, res) => {
+  const contact = await new Contact({
+    date: new Date().toLocaleString(),
+    user_id: req.user.id,
+    name: req.body.name,
+    feedback: req.body.feedback,
+    email: req.body.email,
+  });
+  try {
+    const al = await contact.save();
+    res.redirect("/contact", {
+      message: "FeedBack added We will contact Soon",
+    });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+  re.redirect("/contact");
 });
 
 app.get("/blogpage/:slug/:id", idloggedIn, async (req, res) => {
@@ -241,6 +267,10 @@ app.post("/signup", async (req, res) => {
 app.get("/logout", (req, res) => {
   req.logout();
   res.redirect("/");
+});
+
+app.get("/profile", (req, res) => {
+  res.render("profile", { layout: "extra" });
 });
 app.listen(process.env.PORT, () => {
   console.log(`Blog app listening at http://localhost:${process.env.PORT}`);

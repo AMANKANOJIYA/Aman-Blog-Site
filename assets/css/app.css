@@ -197,6 +197,78 @@ form {
   padding: 8px 20px;
 }
 /* Comment Section --------------------------- */
+/* Profile Section --------------------------- */
+.main-profile {
+  width: 100%;
+  height: auto;
+  padding: 100px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+.img-section {
+  height: auto;
+  width: 35%;
+}
+.img-section img {
+  height: 360px;
+  width: 360px;
+  border-radius: 50%;
+}
+.img-section span {
+  position: relative;
+  top: -58px;
+  left: -75px;
+  padding: 15px;
+  background: white;
+  z-index: 1;
+  border-radius: 50%;
+}
+.bio-section {
+  width: 65%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  height: 100%;
+  padding: 10px 20px;
+}
+.bio-section h2 {
+  font-family: var(--font-axis);
+  color: var(--main-color);
+  font-size: 43px;
+  margin-bottom: 18px;
+}
+.bio-section .p {
+  font-family: var(--font-mvboli);
+  font-size: 18px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+.bio-section h4 {
+  margin-top: 30px;
+  font-family: var(--font-axis);
+  margin-bottom: 8px;
+}
+.bio-intrest {
+  height: 100px;
+  width: 100%;
+  border: none;
+  background-color: white;
+  border-radius: 20px;
+  padding: 20px;
+}
+.bio-intrest span {
+  padding: 4px 20px;
+  border-radius: 31px;
+  border: 0.3px solid black;
+  margin: 10px;
+}
+/* Profile Section --------------------------- */
+
 @media only screen and (max-width: 650px) {
   .top ul {
     display: none;

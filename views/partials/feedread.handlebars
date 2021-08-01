@@ -1,0 +1,18 @@
+<table data-toggle="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>FeedBack</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each contact_data}}
+      <tr>
+        <td>{{this.name}}</td>
+        <td>{{this.email}}</td>
+        <td>{{this.feedback}}</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

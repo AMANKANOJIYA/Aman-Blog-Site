@@ -298,27 +298,66 @@ app.get("/profile", idloggedIn, async (req, res) => {
   }
 });
 
-app.get("/admin", idloggedIn, async (req, res) => {
+async function verifyAdmin(req) {
   const id = req.user.id;
   var data1 = await User.findById(id);
   data1 = data1.toJSON();
   const username = data1.username;
-  const password = data1.password;
-  await Admin.findOne({ Admin_ID: data1.email }, (err, user) => {
+  await Admin.findOne({ Admin_ID: data1.email }, async (err, user) => {
     if (err) {
-      res.redirect("/");
+      return false;
     }
     if (user != null) {
       if (toString(username) === toString(user.Admin_name)) {
-        res.render("adminMain", { layout: "extra" });
+        return true;
       } else {
-        res.redirect("/");
+        return false;
       }
     } else {
       res.redirect("/");
     }
   });
+  return true;
+}
+
+app.get("/admin", idloggedIn, async (req, res) => {
+  const verify = verifyAdmin(req);
+  if (verify) {
+    const contact_data = await Contact.find();
+    res.render("adminMain", {
+      layout: "admin",
+      contact_data: contact_data.map((each) => each.toJSON()),
+    });
+  } else {
+    res.redirect("/");
+  }
 });
+
+app.post("/admin/blog", idloggedIn, async (req, res) => {
+  const verify = verifyAdmin(req);
+  if (verify) {
+    const category = req.body.category.split(",");
+    console.log(category);
+    const user_new = new BlogPost({
+      img_src: req.body.img_src,
+      date: new Date().toLocaleString(),
+      title: req.body.title,
+      content: req.body.content,
+      slug: req.body.slug,
+      category: category,
+    });
+    try {
+      const al = await user_new.save();
+      res.redirect("/admin");
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+      res.redirect("/admin");
+    }
+  } else {
+    res.redirect("/");
+  }
+});
+
 app.listen(process.env.PORT, () => {
   console.log(`Blog app listening at http://localhost:${process.env.PORT}`);
 });

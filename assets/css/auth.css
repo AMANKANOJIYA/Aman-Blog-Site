@@ -61,3 +61,12 @@
   font-family: var(--font-mvboli);
   font-size: 15px;
 }
+
+.small-containor {
+  width: 85%;
+  padding: 100px;
+  margin: auto;
+}
+tr {
+  background-color: white;
+}

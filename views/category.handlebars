@@ -4,11 +4,11 @@
 <div class="catrgory-block">
 {{#each category}}
   <a
-    href="/blogpage/{{this.slug}}"
+    href="/blogpage/{{this.slug}}/{{this._id}}"
     style="list-style: none; text-decoration:none;"
   >
     <div class="card" id="card-{{this._id}}">
-      <img src="../{{this.img_src}}" alt="" />
+      <img src="../{{this.img_src}}" alt="" srcset="{{this.img_src}}"/>
       <div class="blog-cont">
         <span class="short-des-blog time">{{this.date}}</span>
         <h3 class="title-blog title">{{this.title}}

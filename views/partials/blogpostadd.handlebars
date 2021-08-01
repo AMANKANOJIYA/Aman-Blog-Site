@@ -1,0 +1,31 @@
+<h3>Add Blog</h3>
+<form action="/admin/blog" method="post" class="form_auth">
+  <div class="form_div">
+    <label for="img_src">Image Link*</label>
+    <input type="text" id="img_src" name="img_src" class="auth_input" />
+  </div>
+  <div class="form_div">
+    <label for="title">Title*</label>
+    <input type="text" id="title" name="title" class="auth_input" />
+  </div>
+  <div class="form_div">
+    <label for="content">Content*</label>
+    <textarea
+      name="content"
+      id="comment-area"
+      rows="5"
+      style="width: 100%;
+     margin: none; 
+    border-radius: 21px;"
+    ></textarea>
+  </div>
+  <div class="form_div">
+    <label for="slug">Slug*</label>
+    <input type="text" id="slug" name="slug" class="auth_input" />
+  </div>
+  <div class="form_div">
+    <label for="category">Category*</label>
+    <input type="text" id="category" name="category" class="auth_input" />
+  </div>
+  <button type="submit" class="auth_submit">Add Blog</button>
+</form>

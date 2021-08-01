@@ -17,7 +17,7 @@ const blogSchema = new mongoose.Schema({
   bio: {
     type: String,
     required: true,
-    default: "I am a Tech Geeak",
+    default: "I am a Tech Geek",
   },
   username: {
     type: String,

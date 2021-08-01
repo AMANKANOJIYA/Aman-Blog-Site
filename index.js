@@ -12,13 +12,16 @@ const Comment = require("./models/commentSchema");
 const SocialMedia = require("./models/socialSchema");
 const Contact = require("./models/contactSchema");
 const User = require("./models/userSchema");
+const Admin = require("./models/adminSchema");
 const bodyParser = require("body-parser");
 const content = require("./data/blog");
 const category = require("./data/category");
 const url = "mongodb://localhost/AmanBlogPost";
 const localStrategy = require("passport-local").Strategy;
+const { error, Console } = require("console");
 const app = express();
-
+// const adminRouter = require("./routes/admin");
+// app.use("/admin", adminRouter);
 const hbs = exphb.create({
   helpers: {
     rank: function (value) {
@@ -89,6 +92,11 @@ function idloggedIn(req, res, next) {
 function idloggedOut(req, res, next) {
   if (!req.isAuthenticated()) return next();
   res.redirect("/");
+}
+async function AdminAccess(req, res, next) {
+  if (!req.isAuthenticated()) {
+  }
+  res.redirect("/logout");
 }
 // Requests ---------------------------------------------------------------
 
@@ -212,12 +220,6 @@ app.get("/category/:slug", idloggedIn, async (req, res) => {
   }
 });
 
-// app.get("/comment", async (req, res) => {
-//   console.log("request comment");
-//   const comment = await Comment.find();
-//   res.json(comment);
-// });
-
 app.post("/socialmedia", idloggedIn, async (req, res) => {
   const social = new SocialMedia({
     date: new Date().toLocaleString(),
@@ -253,13 +255,10 @@ app.post("/signup", async (req, res) => {
   const olddata = await User.find();
   var sameContent = true;
   olddata.forEach((each) => {
-    console.log(each.username, req.body.username, each.email, req.body.email);
     if (each.username == req.body.username || each.email == req.body.email) {
       sameContent = false;
-      console.log(sameContent);
     }
   });
-  console.log(sameContent);
   if (sameContent) {
     const user_new = new User({
       datejoin: new Date().toLocaleString(),
@@ -297,6 +296,28 @@ app.get("/profile", idloggedIn, async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
+});
+
+app.get("/admin", idloggedIn, async (req, res) => {
+  const id = req.user.id;
+  var data1 = await User.findById(id);
+  data1 = data1.toJSON();
+  const username = data1.username;
+  const password = data1.password;
+  await Admin.findOne({ Admin_ID: data1.email }, (err, user) => {
+    if (err) {
+      res.redirect("/");
+    }
+    if (user != null) {
+      if (toString(username) === toString(user.Admin_name)) {
+        res.render("adminMain", { layout: "extra" });
+      } else {
+        res.redirect("/");
+      }
+    } else {
+      res.redirect("/");
+    }
+  });
 });
 app.listen(process.env.PORT, () => {
   console.log(`Blog app listening at http://localhost:${process.env.PORT}`);

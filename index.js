@@ -357,7 +357,7 @@ app.post("/admin/blog", idloggedIn, async (req, res) => {
     res.redirect("/");
   }
 });
-
-app.listen(process.env.PORT, () => {
-  console.log(`Blog app listening at http://localhost:${process.env.PORT}`);
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`Blog app listening at http://localhost:${port}`);
 });

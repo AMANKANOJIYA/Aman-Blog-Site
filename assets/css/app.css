@@ -289,6 +289,58 @@ form {
 }
 /* Social Section --------------------------- */
 
+#ham-opener {
+  width: 40px;
+  height: 31px;
+  display: none;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.line {
+  background: var(--main-color);
+  height: 3px;
+  width: 60%;
+}
+.hamburger {
+  display: none;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  top: 0px;
+  animation: 0.3s openham ease-in-out forwards;
+}
+@keyframes openham {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+.content ul a {
+  text-decoration: none;
+  color: var(--main-color);
+  font-size: 28px;
+  font-family: var(--font-axis);
+}
+.content ul a li {
+  list-style: none;
+  margin: 15px auto;
+}
+.closer {
+  text-decoration: none;
+  color: var(--main-color);
+  font-family: var(--font-axis);
+  font-size: 27px;
+  position: absolute;
+  top: 26px;
+  right: 50px;
+}
+
 @media only screen and (max-width: 800px) {
   .about-content {
     width: 100%;
@@ -302,11 +354,11 @@ form {
   .main-profile {
     padding: 100px 30px;
   }
-}
-@media only screen and (max-width: 650px) {
   .top ul {
     display: none;
   }
+}
+@media only screen and (max-width: 650px) {
   .top {
     padding: 1px 42px 1px 20px;
     height: 70px;

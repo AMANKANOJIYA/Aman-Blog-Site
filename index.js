@@ -45,9 +45,10 @@ app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 app.use(express.static(path.join(__dirname, "assets")));
 app.use(flash());
+const environment=process.env.SESSION_SECREAT || "aman"
 app.use(
   session({
-    secret: process.env.SESSION_SECREAT,
+    secret: environment,
     resave: false,
     saveUninitialized: true,
   })

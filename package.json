@@ -4,7 +4,7 @@
   "description": "This is a website for bloginh by aman kanojiya and this is ,y first deployed website",
   "main": "index.js",
   "scripts": {
-    "start": "index.js"
+    "start": "node index.js"
   },
   "author": "Aman Kanojiya",
   "license": "ISC",

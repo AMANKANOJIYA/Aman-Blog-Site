@@ -1,24 +1,24 @@
 const category = [
   {
-    category_name: "Culture",
+    category_name: "Python",
   },
   {
-    category_name: "Food",
+    category_name: "Java",
   },
   {
     category_name: "Technology",
   },
   {
-    category_name: "Human",
+    category_name: "Maths",
   },
   {
-    category_name: "Creativity",
+    category_name: "Physics",
   },
   {
     category_name: "Music",
   },
   {
-    category_name: "Health",
+    category_name: "Programmer",
   },
 ];
 module.exports = category;

@@ -19,6 +19,7 @@
   font-size: 17px;
   letter-spacing: 1px;
   line-height: 25px;
+  font-family: var(--font-calibri);
 }
 .blogpage-heading {
   width: auto;
@@ -211,6 +212,7 @@ form {
 .img-section {
   height: auto;
   width: 35%;
+  min-width: 400px;
 }
 .img-section img {
   height: 360px;
@@ -287,6 +289,20 @@ form {
 }
 /* Social Section --------------------------- */
 
+@media only screen and (max-width: 800px) {
+  .about-content {
+    width: 100%;
+  }
+  .lowerbar {
+    padding: 0px 20px;
+  }
+  .bio-section {
+    width: 95% !important;
+  }
+  .main-profile {
+    padding: 100px 30px;
+  }
+}
 @media only screen and (max-width: 650px) {
   .top ul {
     display: none;

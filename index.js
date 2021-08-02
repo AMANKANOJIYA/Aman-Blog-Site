@@ -188,7 +188,7 @@ app.post("/blogpage/:slug/:id", idloggedIn, async (req, res) => {
     user_id: req.user.id,
     user_name: user_name,
     post_id: req.params.id,
-    content_comment: req.body.comment,
+    content_comment: req.body.comment.replace(/<[^>]*>?/gm, " "),
   });
   try {
     const al = await comment.save();
@@ -259,7 +259,7 @@ app.post("/signup", async (req, res) => {
       sameContent = false;
     }
   });
-  if (sameContent) {
+  if (sameContent && req.body.password == req.body.cpassword) {
     const user_new = new User({
       datejoin: new Date().toLocaleString(),
       username: req.body.username,

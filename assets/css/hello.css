@@ -123,7 +123,7 @@ section {
   margin-bottom: auto;
 }
 #right {
-  flex-direction: column;
+  flex-direction: row;
   width: 65%;
   flex-wrap: wrap;
   text-align: left;
@@ -324,6 +324,7 @@ section {
   font-size: 16px;
   color: var(--main-color);
   font-weight: 600;
+  cursor: pointer;
 }
 .links {
   width: 15%;

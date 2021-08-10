@@ -1,32 +1,33 @@
-// require("dotenv").config();
-// const express = require("express");
-// const mongoose = require("mongoose");
-// const session = require("express-session");
-// const passport = require("passport");
-// const flash = require("express-flash");
-// var bodyParser = require("body-parser");
-// const route = express.Router();
-// const bcrypt = require("bcrypt");
-// const Admin = require("../models/adminSchema");
-// const url = "mongodb://localhost/AmanBlogPost";
-// const localStrategy = require("passport-local").Strategy;
+require("dotenv").config();
+const express = require("express");
+const mongoose = require("mongoose");
+const session = require("express-session");
+const passport = require("passport");
+const flash = require("express-flash");
+var bodyParser = require("body-parser");
+const route = express.Router();
+const bcrypt = require("bcrypt");
+const Admin = require("../models/adminSchema");
+const url =
+  "mongodb+srv://AmanKanojiya:aman4203kanojiya@scrollblog.hu7co.mongodb.net/AmanBlogPost?retryWrites=true&w=majority";
+const localStrategy = require("passport-local").Strategy;
 // // MiddleWares---------------------------------------------------------------
-// route.use(bodyParser.urlencoded({ extended: false }));
-// route.use(bodyParser.json());
-// route.use(flash());
-// route.use(
-//   session({
-//     secret: process.env.SESSION_SECREAT,
-//     resave: false,
-//     saveUninitialized: true,
-//   })
-// );
+route.use(bodyParser.urlencoded({ extended: false }));
+route.use(bodyParser.json());
+route.use(flash());
+route.use(
+  session({
+    secret: process.env.SESSION_SECREAT,
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 // // mongoose connection-------------------------------------------------------
-// mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
-// const con = mongoose.connection;
-// con.on("open", () => {
-//   console.log("Connected ........");
-// });
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
+const con = mongoose.connection;
+con.on("open", () => {
+  console.log("Connected ........");
+});
 // //function-------------------------------------------------------------
 // route.use(passport.initialize());
 // route.use(passport.session());
@@ -67,41 +68,43 @@
 //   res.redirect("/admin/");
 // }
 // // // -----------------------------------------------------------------------
-// route.get("/login", idloggedOut, (req, res) => {
-//   res.render("adminLogin", { layout: "extra" });
-// });
+route.get("/login", (req, res) => {
+  res.render("adminLogin", { layout: "extra" });
+});
 
-// route.post(
-//   "/login",
-//   passport.authenticate("local", {
-//     successRedirect: "/admin/",
-//     failureRedirect: "/admin/login?error=true",
-//     failureFlash: true,
-//   })
-// );
+route.post(
+  "/login",
+  passport.authenticate("local", {
+    successRedirect: "/admin/",
+    failureRedirect: "/admin/login?error=true",
+    failureFlash: true,
+  })
+);
 
-// route.get("/", idloggedIn, (req, res) => {
-//   res.render("adminMain", { layout: "extra" });
-// });
+route.get("/", (req, res) => {
+  res.render("adminMain", { layout: "extra" });
+});
 
 // route.post("/", (req, res) => {
 //   res.render("adminMain", { layout: "extra" });
 // });
 
-// route.post("/", async (req, res) => {
-//   const passwordhash = await bcrypt.hash(req.body.password, 10);
-//   const content = new Admin({
-//     Admin_name: req.body.admin_name,
-//     Admin_ID: req.body.username,
-//     password: passwordhash,
-//     PassID: req.body.passID,
-//   });
-//   try {
-//     const al = await content.save();
-//     res.redirect("/login");
-//   } catch (err) {
-//     res.status(500).json({ message: err.message });
-//   }
-// });
+route.post("/", async (req, res) => {
+  const passwordhash = await bcrypt.hash(req.body.password, 10);
+  const content = new Admin({
+    Admin_name: req.body.admin_name,
+    Admin_ID: req.body.username,
+    password: passwordhash,
+    PassID: req.body.passID,
+  });
+  console.log("I worked");
+  try {
+    const al = await content.save();
+    console.log(al);
+    res.json({ message: "SUCCESS" });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
 
-// module.exports = route;
+module.exports = route;

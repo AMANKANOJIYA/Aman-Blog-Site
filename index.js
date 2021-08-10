@@ -16,7 +16,8 @@ const Admin = require("./models/adminSchema");
 const bodyParser = require("body-parser");
 const content = require("./data/blog");
 const category = require("./data/category");
-const url = "mongodb://localhost/AmanBlogPost";
+const url =
+  "mongodb+srv://AmanKanojiya:aman4203kanojiya@scrollblog.hu7co.mongodb.net/AmanBlogPost?retryWrites=true&w=majority";
 const localStrategy = require("passport-local").Strategy;
 const { error, Console } = require("console");
 const app = express();
@@ -45,7 +46,7 @@ app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 app.use(express.static(path.join(__dirname, "assets")));
 app.use(flash());
-const environment=process.env.SESSION_SECREAT || "aman"
+const environment = process.env.SESSION_SECREAT;
 app.use(
   session({
     secret: environment,
@@ -155,9 +156,7 @@ app.post("/contact", idloggedIn, async (req, res) => {
   });
   try {
     const al = await contact.save();
-    res.redirect("/contact", {
-      message: "FeedBack added We will contact Soon",
-    });
+    res.redirect("/contact");
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -299,30 +298,34 @@ app.get("/profile", idloggedIn, async (req, res) => {
   }
 });
 
-async function verifyAdmin(req) {
+async function verifyAdmin(req, res) {
   const id = req.user.id;
+  console.log(id);
   var data1 = await User.findById(id);
   data1 = data1.toJSON();
+  console.log(data1);
   const username = data1.username;
+  console.log(username);
   await Admin.findOne({ Admin_ID: data1.email }, async (err, user) => {
     if (err) {
       return false;
     }
     if (user != null) {
-      if (toString(username) === toString(user.Admin_name)) {
+      console.log(user);
+      if (username === user.Admin_name) {
         return true;
       } else {
         return false;
       }
     } else {
-      res.redirect("/");
+      return false;
     }
   });
-  return true;
+  return false;
 }
 
 app.get("/admin", idloggedIn, async (req, res) => {
-  const verify = verifyAdmin(req);
+  const verify = await verifyAdmin(req, res);
   if (verify) {
     const contact_data = await Contact.find();
     res.render("adminMain", {

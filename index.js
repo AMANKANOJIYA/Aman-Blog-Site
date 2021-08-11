@@ -300,28 +300,25 @@ app.get("/profile", idloggedIn, async (req, res) => {
 
 async function verifyAdmin(req, res) {
   const id = req.user.id;
-  console.log(id);
   var data1 = await User.findById(id);
   data1 = data1.toJSON();
-  console.log(data1);
   const username = data1.username;
-  console.log(username);
+  var final = false;
   await Admin.findOne({ Admin_ID: data1.email }, async (err, user) => {
     if (err) {
-      return false;
+      final = false;
     }
     if (user != null) {
-      console.log(user);
       if (username === user.Admin_name) {
-        return true;
+        final = true;
       } else {
-        return false;
+        final = false;
       }
     } else {
-      return false;
+      final = false;
     }
   });
-  return false;
+  return final;
 }
 
 app.get("/admin", idloggedIn, async (req, res) => {

@@ -324,31 +324,33 @@ app.post("/profile", idloggedIn, async (req, res) => {
   }
 });
 
-async function verifyAdmin(req, res) {
+async function verifyAdmin(req) {
   const id = req.user.id;
   var data1 = await User.findById(id);
   data1 = data1.toJSON();
   const username = data1.username;
-  var final = false;
-  await Admin.findOne({ Admin_ID: data1.email }, async (err, user) => {
-    if (err) {
-      final = false;
-    }
-    if (user != null) {
-      if (username === user.Admin_name) {
-        final = true;
-      } else {
-        final = false;
+  let query = await Admin.findOne(
+    { Admin_ID: data1.email },
+    async (err, user) => {
+      if (err) {
+        return false;
       }
-    } else {
-      final = false;
+      if (user != null) {
+        if (username === user.Admin_name) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return false;
+      }
     }
-  });
-  return final;
+  );
+  return query;
 }
 
 app.get("/admin", idloggedIn, async (req, res) => {
-  const verify = await verifyAdmin(req, res);
+  const verify = await verifyAdmin(req);
   if (verify) {
     const contact_data = await Contact.find();
     res.render("adminMain", {
@@ -361,7 +363,7 @@ app.get("/admin", idloggedIn, async (req, res) => {
 });
 
 app.post("/admin/blog", idloggedIn, async (req, res) => {
-  const verify = verifyAdmin(req);
+  const verify = await verifyAdmin(req);
   if (verify) {
     const category = req.body.category.split(",");
     const user_new = new BlogPost({

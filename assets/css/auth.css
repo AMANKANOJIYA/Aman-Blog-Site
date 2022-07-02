@@ -36,12 +36,17 @@
   font-weight: 400;
   color: black;
 }
-.form_div input {
+.form_div input,
+.form_div textarea {
   height: 40px;
   width: 100%;
   border: none;
   border-radius: 10px;
   padding: 1px 10px;
+}
+.form_div textarea {
+  height: 100px;
+  padding: 10px;
 }
 .auth_submit {
   height: 40px;

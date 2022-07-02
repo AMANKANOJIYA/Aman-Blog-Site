@@ -1,15 +1,7 @@
-<div
-  class="short-des-blog time"
-  style="margin-bottom: 40px;
+<div class="short-des-blog time" style="margin-bottom: 40px;
     width: 100%;
-    text-align: center;"
->{{blog_content.date}}</div>
-<img
-  class="blogpage-image"
-  src="../{{blog_content.img_src}}"
-  alt="This is a Image"
-  srcset="{{blog_content.img_src}}"
-/>
+    text-align: center;">{{blog_content.date}}</div>
+<img class="blogpage-image" src="../{{blog_content.img_src}}" alt="This is a Image" srcset="{{blog_content.img_src}}" />
 <h1 class="blogpage-heading">{{blog_content.title}}</h1>
-<p class="blogpage-content">{{blog_content.content}}</p>
+<div class="blogpage-content">{{{blog_content.content}}}</div>
 {{>comment}}

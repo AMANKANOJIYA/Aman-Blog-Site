@@ -36,6 +36,20 @@
   color: var(--dark-gray);
   padding: 10px 40px 40px;
 }
+.blogpage-content p {
+  margin: 18px 15px 30px;
+}
+.blogpage-content img {
+  margin: 20px 10%;
+  width: 70% !important;
+  height: auto !important;
+}
+.blogpage-content a {
+  color: var(--main-color);
+}
+.blogpage-content ul {
+  margin: 0px 80px;
+}
 .blogpage-image {
   width: 80%;
   border-radius: 3px;
@@ -202,31 +216,55 @@ form {
 .main-profile {
   width: 100%;
   height: auto;
-  padding: 100px;
   display: flex;
   align-items: center;
   flex-direction: row;
   justify-content: space-evenly;
   flex-wrap: wrap;
+  padding: 100px 100px 32px;
 }
 .img-section {
   height: auto;
   width: 35%;
   min-width: 400px;
 }
-.img-section img {
+.user-image {
   height: 360px;
   width: 360px;
   border-radius: 50%;
 }
-.img-section span {
+#edit-profile-icon {
   position: relative;
   top: -58px;
   left: -75px;
   padding: 15px;
-  background: white;
   z-index: 1;
   border-radius: 50%;
+  cursor: pointer;
+}
+#edit-profile-icon img {
+  height: 4em;
+  width: 4em;
+  border-radius: 50%;
+  background-color: white;
+}
+#edit-profile {
+  display: none;
+  flex-direction: column;
+}
+#cancel-edit-profile {
+  height: 40px !important;
+  width: 200px !important;
+  margin: 0px auto 40px;
+}
+.form_div_profile {
+  width: 80%;
+}
+.profile_submit {
+  margin-top: 30px;
+  height: 60px !important;
+  width: 30% !important;
+  font-size: 1.1em;
 }
 .bio-section {
   width: 65%;
@@ -296,6 +334,7 @@ form {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  cursor: pointer;
 }
 .line {
   background: var(--main-color);
@@ -311,6 +350,7 @@ form {
   justify-content: center;
   background: white;
   top: 0px;
+  z-index: 4;
   animation: 0.3s openham ease-in-out forwards;
 }
 @keyframes openham {
@@ -339,6 +379,7 @@ form {
   position: absolute;
   top: 26px;
   right: 50px;
+  cursor: pointer;
 }
 
 @media only screen and (max-width: 800px) {

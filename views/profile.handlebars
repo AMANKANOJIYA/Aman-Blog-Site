@@ -1,8 +1,10 @@
 {{>topNav}}
-<div class="main-profile">
+<div class="main-profile" id="main-profile">
     <div class="img-section">
         <img src="{{data.img_src}}" alt="" srcset="" class="user-image">
-        <span>Edit</span>
+        <span id="edit-profile-icon">
+            <img src="../images/edit.png" alt="">
+        </span>
     </div>
     <div class="bio-section">
         <h2>{{data.username}}</h2>
@@ -10,10 +12,45 @@
         <span class="date">Join Date : {{data.datejoin}}</span>
         <h4>Intrested in :</h4>
         <p class="bio-intrest">
-            {{#each data.catrgoryIntrested}}
-            <span>{{this}}</span>
+            {{#each data.categoryIntrested}}
+                <span>{{this}}</span>
             {{/each}}
         </p>
     </div>
 </div>
+<div id="edit-profile">
+    <form class="main-profile form_auth" method="POST">
+        <div class="form_div form_div_profile">
+            <label for="imageurl">Image URL</label>
+            <input type="text" name="imageurl" placeholder="Username" value="{{data.img_src}}">
+        </div>
+        <div class="form_div form_div_profile">
+            <label for="username">UserName</label>
+            <input type="text" name="username" placeholder="Username" value="{{data.username}}">
+        </div>
+        <div class="form_div form_div_profile">
+            <label for="bio">Bio</label>
+            <textarea type="text" name="bio" id="bio-editor" placeholder="Bio">{{data.bio}}</textarea>
+        </div>
+        <div class="form_div form_div_profile">
+            <label for="categoryIntrested">Category Intrested</label>
+            <input type="text" name="categoryIntrested" placeholder="Category Intrested"
+                value="{{data.catrgoryIntrested}}">
+        </div>
+        <button type="submit" class="auth_submit profile_submit">Submit</button>
+    </form>
+    <button id="cancel-edit-profile" class="auth_submit profile_submit">Cancel</button>
+</div>
+<script>
+    console.log(document.getElementById("edit-profile-icon"));
+    document.getElementById("edit-profile-icon").addEventListener("click", () => {
+        document.getElementById("edit-profile").style.display = "flex";
+        document.getElementById("main-profile").style.display = "none";
+    });
+    document.getElementById("cancel-edit-profile").addEventListener("click", () => {
+        document.getElementById("edit-profile").style.display = "none";
+        document.getElementById("main-profile").style.display = "flex";
+    });
+
+</script>
 {{>socialMedia}}

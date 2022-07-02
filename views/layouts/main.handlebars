@@ -1,4 +1,5 @@
 <html lang="en">
+
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -6,20 +7,17 @@
     <title>Main-Blog-Scroll</title>
     <link rel="stylesheet" href="/css/hello.css" />
     <link rel="stylesheet" href="/css/app.css" />
+    <link rel="stylesheet" href="/css/auth.css" />
   </head>
+
   <body>
-{{>topNav}}
-{{>hamburger}}
-{{>path}}
+    {{>topNav}}
+    {{>hamburger}}
+    {{>path}}
     <div class="big-containor" id="big-containor">
       <section class="section left" id="left">
         <div class="big-width">
-          <input
-            type="search"
-            placeholder="Search...."
-            class="input"
-            id="search"
-          />
+          <input type="search" placeholder="Search...." class="input" id="search" />
           {{>category-task}}
           <div class="categories" id="blogs">
             <h2 style="margin-bottom: 30px;">Top Posts</h2>
@@ -42,4 +40,5 @@
     {{>socialMedia}}
   </body>
   <script src="/js/script.js"></script>
+
 </html>

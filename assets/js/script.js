@@ -32,10 +32,13 @@ document.getElementById("ham-opener").addEventListener("click", () => {
     hamburger.style.display = "none";
   }
 });
-document.getElementById("ham-closer").addEventListener("click", () => {
-  if (hamburger.style.display != "flex") {
-    hamburger.style.display = "flex";
-  } else {
-    hamburger.style.display = "none";
-  }
-});
+
+if (window.innerWidth < 800) {
+  document.getElementById("ham-closer").addEventListener("click", () => {
+    if (hamburger.style.display != "flex") {
+      hamburger.style.display = "flex";
+    } else {
+      hamburger.style.display = "none";
+    }
+  });
+}

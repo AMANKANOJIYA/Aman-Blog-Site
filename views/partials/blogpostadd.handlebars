@@ -10,14 +10,9 @@
   </div>
   <div class="form_div">
     <label for="content">Content*</label>
-    <textarea
-      name="content"
-      id="comment-area"
-      rows="5"
-      style="width: 100%;
+    <textarea name="content" id="comment-area" rows="5" style="width: 100%;
      margin: none; 
-    border-radius: 21px;"
-    ></textarea>
+    border-radius: 21px;"></textarea>
   </div>
   <div class="form_div">
     <label for="slug">Slug*</label>
@@ -29,3 +24,6 @@
   </div>
   <button type="submit" class="auth_submit">Add Blog</button>
 </form>
+<script>
+  CKEDITOR.replace('content');
+</script>

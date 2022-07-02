@@ -16,8 +16,7 @@ const Admin = require("./models/adminSchema");
 const bodyParser = require("body-parser");
 const content = require("./data/blog");
 const category = require("./data/category");
-const url =
-  "mongodb+srv://AmanKanojiya:aman4203kanojiya@scrollblog.hu7co.mongodb.net/AmanBlogPost?retryWrites=true&w=majority";
+const url = process.env.DB_URL;
 const localStrategy = require("passport-local").Strategy;
 const { error, Console } = require("console");
 const app = express();
@@ -30,6 +29,11 @@ const hbs = exphb.create({
     },
     subString: function (value) {
       return value.slice(0, 300);
+    },
+    textRender: function (value) {
+      console.log(value);
+      const text = value;
+      return text;
     },
   },
 });
@@ -188,7 +192,7 @@ app.post("/blogpage/:slug/:id", idloggedIn, async (req, res) => {
     user_id: req.user.id,
     user_name: user_name,
     post_id: req.params.id,
-    content_comment: req.body.comment.replace(/<[^>]*>?/gm, " "),
+    content_comment: req.body.comment,
   });
   try {
     const al = await comment.save();
@@ -287,12 +291,34 @@ app.get("/logout", (req, res) => {
 
 app.get("/profile", idloggedIn, async (req, res) => {
   const data = await User.findById(req.user.id);
+  // var dataprof = data.toJSON();
+  // dataprof.categoryIntrested = dataprof.categoryIntrested.join(",");
+  // console.log(dataprof);
   try {
     res.render("profile", {
       layout: "extra",
       title: "Profile | Me",
       data: data.toJSON(),
     });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+app.post("/profile", idloggedIn, async (req, res) => {
+  var username = req.body.username;
+  var imageurl = req.body.imageurl;
+  var bio = req.body.bio;
+  var categoryIntrested = req.body.categoryIntrested;
+  categoryIntrested = categoryIntrested.split(",");
+  try {
+    const data = await User.findById(req.user.id);
+    data.username = username;
+    data.img_src = imageurl;
+    data.bio = bio;
+    data.categoryIntrested = catergoryIntrested;
+    const al = await data.save();
+    res.redirect("/profile");
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -338,7 +364,6 @@ app.post("/admin/blog", idloggedIn, async (req, res) => {
   const verify = verifyAdmin(req);
   if (verify) {
     const category = req.body.category.split(",");
-    console.log(category);
     const user_new = new BlogPost({
       img_src: req.body.img_src,
       date: new Date().toLocaleString(),
